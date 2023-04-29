@@ -9,12 +9,9 @@ ARG CELERY_BROKER_URL="amqp://user-develop:develop@localhost:5672"
 RUN apt-get update \
  && apt-get -y --no-install-recommends install \
  wget curl \
- python3 python3-pip \
- openjdk-17-jre-headless \
- libgomp1 vim \
+ python3 python3-pip vim \
  python3-venv \
- openbabel snapd \
- libopenbabel-dev
+ openbabel libopenbabel-dev nano
 
 ARG UID=5988
 ARG GID=5988
