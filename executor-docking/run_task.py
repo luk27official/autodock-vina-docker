@@ -5,8 +5,6 @@ import json
 import subprocess
 
 import rdkit
-from rdkit.Chem import PandasTools
-import pandas as pd
 import meeko
 
 def prepare_ligand(identifier: str, inputFile: str):
