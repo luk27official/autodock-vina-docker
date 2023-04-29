@@ -14,10 +14,9 @@ def prepare_ligand(identifier: str, inputFile: str):
     with open(inputFile) as inp:
         input_json = json.load(inp)
         smiles = input_json['hash']
-
     lig = rdkit.Chem.MolFromSmiles(smiles)
     protonated_lig = rdkit.Chem.AddHs(lig)
-    rdkit.Chem.AllChem.EmbedMolecule(protonated_lig)
+    rdkit.Chem.AllChem.EmbedMolecule(protonated_lig,randomSeed=0xf00d,useRandomCoords=True)
 
     meeko_prep = meeko.MoleculePreparation()
     meeko_prep.prepare(protonated_lig)
@@ -57,5 +56,7 @@ def dock_molecule(identifier: str, inputFile: str):
     subprocess.run(["vina", "--receptor", f"./{identifier}_receptor.pdbqt", "--ligand", f"./{identifier}_ligand.pdbqt", "--config", f"./{identifier}_receptor_vina_box.txt", "--exhaustiveness=32", "--out", f"./{identifier}_out_vina.pdbqt"])
 
 if __name__ == "__main__":
-    dock_molecule("1iep", "input.json")
+    #dock_molecule("1iep", "input.json")
+    #dock_molecule("6WZO", "input_2.json")
+    dock_molecule("1c8k", "input_3.json")
     pass
